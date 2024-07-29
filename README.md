@@ -6,67 +6,36 @@ This repository contains an example of networking in Swift, showcasing how to ma
 
 Table of Contents
 
-#Requirements
-Installation
-Usage
+****Requirements****
+
 Model
 API Client
 View Model
 License
 
-#Requirements
-
-Xcode 12.0+
+****Requirements****
+**Xcode 12.0+
 Swift 5.3+
-iOS 14.0+ (if applicable)
-Installation
+iOS 14.0+ (if applicable)**
 
-To use this project, you can simply clone the repository:
-
-sh
-Copy code
-git clone https://github.com/yourusername/swift-networking-example.git
-Open the project in Xcode:
-
-sh
-Copy code
-cd swift-networking-example
-open SwiftNetworkingExample.xcodeproj
-Usage
-
-Model
+**Model**
 Define a model conforming to Decodable and Identifiable protocols, using a custom property wrapper for safe decoding:
 
-swift
-Copy code
 struct PostMy: Decodable, Identifiable {
     @SafeDecodable var userId: Int?
     @SafeDecodable var id: Int?
     @SafeDecodable var title: String?
     @SafeDecodable var body: String?
 }
-API Client
+
+**API Client**
 Implement a singleton APIClient to handle network requests:
 
-swift
-Copy code
-import Combine
-import Foundation
+Api Client Class is responsible for handling all the network calls, it internally calls Multer, Get, Post, CustomUrlProtocol, Encryption, Adding Authorization tokens etc.
 
-class APIClient {
-    static let shared = APIClient()
-
-    private init() {}
-
-    func makeRequest<T: Decodable>(endpoint: String, method: String, body: [String: Any]? = nil) -> AnyPublisher<T, Error> {
-        // Implementation here...
-    }
-}
-View Model
+**View Model**
 Use UserViewModel to manage data fetching and state:
 
-swift
-Copy code
 import Combine
 import SwiftUI
 
@@ -113,7 +82,7 @@ class UserViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 }
-License
 
+**License**
 This project is licensed under the MIT License. See the LICENSE file for details.
 
