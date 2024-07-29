@@ -21,6 +21,7 @@ Add the following line to your `Package.swift` file:
 dependencies: [
     .package(url: "https://github.com/rajat-suman/swift-api-helper.git", from: "1.0.0")
 ]
+```
 
 
 ## Usage
