@@ -28,6 +28,7 @@ dependencies: [
 
 ### Basic GET Request
 
+```
 import SwiftAPIHelper
 import Combine
 
@@ -44,9 +45,11 @@ let cancellable = apiClient.makeRequest(endpoint: "/users", method: "GET")
     }, receiveValue: { (users: [User]) in
         print("Received users: \(users)")
     })
+```
 
 ### POST Request with Body
 
+```
 import SwiftAPIHelper
 import Combine
 
@@ -64,11 +67,12 @@ let cancellable = apiClient.makeRequest(endpoint: "/users", method: "POST", body
     }, receiveValue: { (response: User) in
         print("User created: \(response)")
     })
-
+```
 
 ## Safe Decoding with Property Wrappers
 Use the @SafeDecodable property wrapper to safely decode JSON responses, handling missing or mismatched data types by setting them to nil.
 
+```
 import SwiftAPIHelper
 
 struct User: Decodable, Identifiable {
@@ -76,12 +80,13 @@ struct User: Decodable, Identifiable {
     @SafeDecodable var name: String?
     @SafeDecodable var email: String?
 }
-
+```
 
 ## Custom URL Protocol
 
 The library allows you to customize the URL session configuration, such as adding encryption or modifying request headers.
 
+```
 class CustomURLProtocol: URLProtocol {
     override class func canInit(with request: URLRequest) -> Bool {
         return true
@@ -116,7 +121,7 @@ class CustomURLProtocol: URLProtocol {
         // Stop the loading process if necessary
     }
 }
-
+```
 
 ## License
 
