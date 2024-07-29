@@ -14,6 +14,14 @@
 		E4A9BA122C575455006D8BDB /* API_CALL_DEMOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A9BA112C575455006D8BDB /* API_CALL_DEMOTests.swift */; };
 		E4A9BA1C2C575455006D8BDB /* API_CALL_DEMOUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A9BA1B2C575455006D8BDB /* API_CALL_DEMOUITests.swift */; };
 		E4A9BA1E2C575455006D8BDB /* API_CALL_DEMOUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A9BA1D2C575455006D8BDB /* API_CALL_DEMOUITestsLaunchTests.swift */; };
+		E4A9BA2C2C5754A0006D8BDB /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A9BA2B2C5754A0006D8BDB /* APIClient.swift */; };
+		E4EA8B5F2C57598E0033BB32 /* models.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EA8B5E2C57598E0033BB32 /* models.swift */; };
+		E4EA8B622C5763C90033BB32 /* Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EA8B612C5763C90033BB32 /* Encryption.swift */; };
+		E4EA8B642C5767F00033BB32 /* CustomURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EA8B632C5767F00033BB32 /* CustomURLProtocol.swift */; };
+		E4EA8B662C5768220033BB32 /* Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EA8B652C5768220033BB32 /* Commons.swift */; };
+		E4EA8B682C5768340033BB32 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EA8B672C5768340033BB32 /* ApiError.swift */; };
+		E4EA8B6A2C577D800033BB32 /* SafeDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EA8B692C577D800033BB32 /* SafeDecodable.swift */; };
+		E4EA8B6C2C579ED80033BB32 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EA8B6B2C579ED80033BB32 /* UserViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +53,14 @@
 		E4A9BA172C575455006D8BDB /* API-CALL-DEMOUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "API-CALL-DEMOUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4A9BA1B2C575455006D8BDB /* API_CALL_DEMOUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_CALL_DEMOUITests.swift; sourceTree = "<group>"; };
 		E4A9BA1D2C575455006D8BDB /* API_CALL_DEMOUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_CALL_DEMOUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E4A9BA2B2C5754A0006D8BDB /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		E4EA8B5E2C57598E0033BB32 /* models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = models.swift; sourceTree = "<group>"; };
+		E4EA8B612C5763C90033BB32 /* Encryption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Encryption.swift; path = "API-CALL-DEMO/encryption/Encryption.swift"; sourceTree = SOURCE_ROOT; };
+		E4EA8B632C5767F00033BB32 /* CustomURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomURLProtocol.swift; sourceTree = "<group>"; };
+		E4EA8B652C5768220033BB32 /* Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commons.swift; sourceTree = "<group>"; };
+		E4EA8B672C5768340033BB32 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
+		E4EA8B692C577D800033BB32 /* SafeDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeDecodable.swift; sourceTree = "<group>"; };
+		E4EA8B6B2C579ED80033BB32 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,11 +111,15 @@
 		E4A9B9FE2C575453006D8BDB /* API-CALL-DEMO */ = {
 			isa = PBXGroup;
 			children = (
+				E4EA8B602C5763950033BB32 /* Encryption */,
+				E4A9BA2D2C5754B8006D8BDB /* models */,
+				E4A9BA2A2C575472006D8BDB /* apiHelper */,
 				E4A9B9FF2C575453006D8BDB /* API_CALL_DEMOApp.swift */,
 				E4A9BA012C575453006D8BDB /* ContentView.swift */,
 				E4A9BA032C575455006D8BDB /* Assets.xcassets */,
 				E4A9BA052C575455006D8BDB /* API_CALL_DEMO.entitlements */,
 				E4A9BA062C575455006D8BDB /* Preview Content */,
+				E4EA8B6B2C579ED80033BB32 /* UserViewModel.swift */,
 			);
 			path = "API-CALL-DEMO";
 			sourceTree = "<group>";
@@ -127,6 +147,35 @@
 				E4A9BA1D2C575455006D8BDB /* API_CALL_DEMOUITestsLaunchTests.swift */,
 			);
 			path = "API-CALL-DEMOUITests";
+			sourceTree = "<group>";
+		};
+		E4A9BA2A2C575472006D8BDB /* apiHelper */ = {
+			isa = PBXGroup;
+			children = (
+				E4A9BA2B2C5754A0006D8BDB /* APIClient.swift */,
+				E4EA8B632C5767F00033BB32 /* CustomURLProtocol.swift */,
+				E4EA8B652C5768220033BB32 /* Commons.swift */,
+				E4EA8B672C5768340033BB32 /* ApiError.swift */,
+				E4EA8B692C577D800033BB32 /* SafeDecodable.swift */,
+			);
+			path = apiHelper;
+			sourceTree = "<group>";
+		};
+		E4A9BA2D2C5754B8006D8BDB /* models */ = {
+			isa = PBXGroup;
+			children = (
+				E4EA8B5E2C57598E0033BB32 /* models.swift */,
+			);
+			name = models;
+			path = "API-CALL-DEMO/models";
+			sourceTree = SOURCE_ROOT;
+		};
+		E4EA8B602C5763950033BB32 /* Encryption */ = {
+			isa = PBXGroup;
+			children = (
+				E4EA8B612C5763C90033BB32 /* Encryption.swift */,
+			);
+			path = Encryption;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +308,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4EA8B662C5768220033BB32 /* Commons.swift in Sources */,
 				E4A9BA022C575453006D8BDB /* ContentView.swift in Sources */,
 				E4A9BA002C575453006D8BDB /* API_CALL_DEMOApp.swift in Sources */,
+				E4EA8B6C2C579ED80033BB32 /* UserViewModel.swift in Sources */,
+				E4EA8B642C5767F00033BB32 /* CustomURLProtocol.swift in Sources */,
+				E4A9BA2C2C5754A0006D8BDB /* APIClient.swift in Sources */,
+				E4EA8B682C5768340033BB32 /* ApiError.swift in Sources */,
+				E4EA8B6A2C577D800033BB32 /* SafeDecodable.swift in Sources */,
+				E4EA8B622C5763C90033BB32 /* Encryption.swift in Sources */,
+				E4EA8B5F2C57598E0033BB32 /* models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
