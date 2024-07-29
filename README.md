@@ -1,88 +1,138 @@
-README
+# Swift API Helper
 
-##Swift Networking Example
+Swift API Helper is a utility library designed to simplify API calls in Swift. It provides an easy-to-use interface for making network requests, handling responses, and managing errors.
 
-This repository contains an example of networking in Swift, showcasing how to make GET and POST requests using Combine and handle decoding using custom property wrappers for safe decoding.
+## Features
 
-Table of Contents
+- Simplified API request creation
+- Supports GET, POST, PUT, DELETE methods
+- JSON encoding and decoding
+- Customizable URL session configurations
+- Easy error handling
+- Safe decoding with property wrappers
 
-****Requirements****
+## Installation
 
-Model
-API Client
-View Model
-License
+### Swift Package Manager
 
-****Requirements****
-**Xcode 12.0+
-Swift 5.3+
-iOS 14.0+ (if applicable)**
+Add the following line to your `Package.swift` file:
 
-**Model**
-Define a model conforming to Decodable and Identifiable protocols, using a custom property wrapper for safe decoding:
+```swift
+dependencies: [
+    .package(url: "https://github.com/rajat-suman/swift-api-helper.git", from: "1.0.0")
+]
 
-struct PostMy: Decodable, Identifiable {
-    @SafeDecodable var userId: Int?
-    @SafeDecodable var id: Int?
-    @SafeDecodable var title: String?
-    @SafeDecodable var body: String?
-}
 
-**API Client**
-Implement a singleton APIClient to handle network requests:
+## Usage
 
-Api Client Class is responsible for handling all the network calls, it internally calls Multer, Get, Post, CustomUrlProtocol, Encryption, Adding Authorization tokens etc.
+### Basic GET Request
 
-**View Model**
-Use UserViewModel to manage data fetching and state:
-
+import SwiftAPIHelper
 import Combine
-import SwiftUI
 
-class UserViewModel: ObservableObject {
-    @Published var users: [User] = []
-    @Published var errorMessage: String?
+let apiClient = APIClient.getInstance()
 
-    private var cancellables = Set<AnyCancellable>()
+let cancellable = apiClient.makeRequest(endpoint: "/users", method: "GET")
+    .sink(receiveCompletion: { completion in
+        switch completion {
+        case .finished:
+            print("Request finished")
+        case .failure(let error):
+            print("Request failed with error: \(error)")
+        }
+    }, receiveValue: { (users: [User]) in
+        print("Received users: \(users)")
+    })
 
-    // GET request
-    func fetchUsers() {
-        APIClient.shared.makeRequest(endpoint: "/users", method: "GET")
-            .sink { completion in
-                switch completion {
-                case .failure(let error):
-                    self.errorMessage = error.localizedDescription
-                case .finished:
-                    break
-                }
-            } receiveValue: { (users: [User]) in
-                self.users = users
-            }
-            .store(in: &cancellables)
+### POST Request with Body
+
+import SwiftAPIHelper
+import Combine
+
+let parameters = ["name": "John Doe", "email": "john.doe@example.com"]
+let apiClient = APIClient.getInstance()
+
+let cancellable = apiClient.makeRequest(endpoint: "/users", method: "POST", body: parameters)
+    .sink(receiveCompletion: { completion in
+        switch completion {
+        case .finished:
+            print("Request finished")
+        case .failure(let error):
+            print("Request failed with error: \(error)")
+        }
+    }, receiveValue: { (response: User) in
+        print("User created: \(response)")
+    })
+
+
+## Safe Decoding with Property Wrappers
+Use the @SafeDecodable property wrapper to safely decode JSON responses, handling missing or mismatched data types by setting them to nil.
+
+import SwiftAPIHelper
+
+struct User: Decodable, Identifiable {
+    @SafeDecodable var id: Int?
+    @SafeDecodable var name: String?
+    @SafeDecodable var email: String?
+}
+
+
+## Custom URL Protocol
+
+The library allows you to customize the URL session configuration, such as adding encryption or modifying request headers.
+
+class CustomURLProtocol: URLProtocol {
+    override class func canInit(with request: URLRequest) -> Bool {
+        return true
     }
 
-    // POST request
-    func fetchPosts() {
-        let body: [String: Any] = [
-            "title": "foo",
-            "body": "bar",
-            "userId": 1
-        ]
-        APIClient.shared.makeRequest(endpoint: "/posts", method: "POST", body: body)
-            .sink { completion in
-                switch completion {
-                case .failure(let error):
-                    self.errorMessage = error.localizedDescription
-                case .finished:
-                    break
-                }
-            } receiveValue: { (posts: PostMy) in
-                print(posts)
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+        return request
+    }
+
+    override func startLoading() {
+        let newRequest = request
+
+        // Custom modifications
+        // ...
+
+        let task = URLSession.shared.dataTask(with: newRequest) { data, response, error in
+            if let data = data {
+                self.client?.urlProtocol(self, didLoad: data)
             }
-            .store(in: &cancellables)
+            if let response = response {
+                self.client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+            }
+            if let error = error {
+                self.client?.urlProtocol(self, didFailWithError: error)
+            }
+            self.client?.urlProtocolDidFinishLoading(self)
+        }
+        task.resume()
+    }
+
+    override func stopLoading() {
+        // Stop the loading process if necessary
     }
 }
 
-**License**
-This project is licensed under the MIT License. See the LICENSE file for details.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+
+### Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/new-feature`)
+3. Commit your changes (`git commit -am 'Add new feature'`)
+4. Push to the branch (`git push origin feature/new-feature`)
+5. Create a new Pull Request
+
+## Contact
+
+For any questions or feedback, please open an issue or contact me at [rsuman1997@gmail.com].
+
+
 
